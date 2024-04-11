@@ -1,0 +1,18 @@
+# data config
+eval_data: data/biography_synthetic.csv
+fewshot_data: data/biography_real.csv
+prompt_data: data/prompts.csv
+
+# model config
+# model: meta-llama/Llama-2-7b-hf
+model: /mnt/nvme_share/common/LLMs/LLaMA2-7b
+
+quant:
+  load_in_8bit: True
+
+# generation config
+batch_size: 8
+max_new_tokens: 10
+
+# global config
+seed: 1
