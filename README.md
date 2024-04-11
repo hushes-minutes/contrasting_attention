@@ -9,30 +9,31 @@ The following commands are used to produce results in the paper:
 Extract attention from a language model
 ```bash
 python save_attention.py \
-+model=meta-llama/Llama-2-7b-hf \
-+dataset=data/biography_real.csv +save_name=attn_dump_llama_7b
+  +model=meta-llama/Llama-2-7b-hf \
+  +dataset=data/biography_real.csv +save_name=attn_dump_llama_7b
 ```
 
 Contrast attention between two language models
 ```bash
 python contrast_attention.py \
-+attn_dump_large=attn_dump_llama_70b +attn_dump_small=attn_dump_llama_7b \
-+attn_diff=attn_diff_llama_70b_7b
+  +attn_dump_large=attn_dump_llama_70b +attn_dump_small=attn_dump_llama_7b \
+  +attn_diff=attn_diff_llama_70b_7b
 ```
 
 Augment the dataset using attention differences
 ```bash
 # augment the dataset (10 times) with random token-dropout
 python data_augmentation.py \
-+augment_type=random +alpha=0.7 +multiply=10 \
-+model=meta-llama/Llama-2-7b-hf \
-+dataset=data/biography_real.csv +save_name=biography_real_aug
+  +augment_type=random +alpha=0.7 +multiply=10 \
+  +model=meta-llama/Llama-2-7b-hf \
+  +dataset=data/biography_real.csv +save_name=biography_real_aug
+
 # augment the dataset with token-dropout weighted by attention (or attention differences)
 python data_augmentation.py \
-+augment_type=attention +alpha=0.7 +beta=0.05 +multiply=10 \
-+attn_weights=attn_diff_llama_70b_7b \
-+model=meta-llama/Llama-2-7b-hf \
-+dataset=data/biography_real.csv +save_name=biography_real_aug
+  +augment_type=attention +alpha=0.7 +beta=0.05 +multiply=10 \
+  +attn_weights=attn_diff_llama_70b_7b \
+  +model=meta-llama/Llama-2-7b-hf \
+  +dataset=data/biography_real.csv +save_name=biography_real_aug
 ```
 
 Training
